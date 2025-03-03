@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成訂單圖檔（手機版）</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            max-width: 100%;
+        }
+        .left-panel, .bottom-panel {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .input-group label {
+            font-weight: bold;
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .input-group input {
+            padding: 5px;
+            width: 180px;
+            border: 1px solid #ccc;
+            flex-grow: 1;
+            max-width: 200px;
+        }
+        .bottom-panel .input-group {
+            display: flex;
+            width: 100%;
+            margin-right: 5px;
+            flex-wrap: wrap;
+        }
+        .upload-section {
+            margin: 15px 0;
+            text-align: center;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .canvas-container {
+            margin-top: 15px;
+            width: 100%;
+            overflow: auto; /* 手機上滾動查看大畫布 */
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid black;
+        }
+
+        /* 手機適配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 5px;
+            }
+            .left-panel, .bottom-panel {
+                max-width: 100%;
+            }
+            .input-group label {
+                width: 80px;
+                font-size: 14px;
+            }
+            .input-group input {
+                width: 150px;
+                font-size: 14px;
+            }
+            .upload-section label {
+                font-size: 14px;
+            }
+            .upload-section small {
+                font-size: 12px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>生成訂單圖檔</h1>
+        <div class="left-panel">
+            <div class="input-group">
+                <label>訂單編號</label>
+                <input type="text" id="order-number-below">
+            </div>
+            <div class="input-group">
+                <label>客戶</label>
+                <input type="text" id="customer-below">
+            </div>
+            <div class="input-group">
+                <label>材料別</label>
+                <input type="text" id="material-type-below">
+            </div>
+            <div class="input-group">
+                <label>顏色</label>
+                <input type="text" id="color-below">
+            </div>
+            <div class="input-group">
+                <label>其他細項</label>
+                <input type="text" id="other-details-below">
+            </div>
+        </div>
+        <div class="upload-section">
+            <label>上傳圖檔:<br><small>(點擊選擇手機圖片或相片)</small></label>
+            <input type="file" id="upload" accept="image/*">
+        </div>
+        <div class="bottom-panel">
+            <div class="input-group">
+                <label>接單日期</label>
+                <input type="text" id="order-date">
+            </div>
+            <div class="input-group">
+                <label>安裝日期</label>
+                <input type="text" id="install-date">
+            </div>
+            <div class="input-group">
+                <label>安裝完成</label>
+                <input type="text" id="install-date-complete">
+            </div>
+            <div class="input-group">
+                <label>安裝地址</label>
+                <input type="text" id="install-address">
+            </div>
+            <div class="input-group">
+                <label>業主</label>
+                <input type="text" id="owner">
+            </div>
+            <div class="input-group">
+                <label>施工人員</label>
+                <input type="text" id="construction-personnel">
+            </div>
+            <div class="input-group">
+                <label>施工安裝</label>
+                <input type="text" id="construction-installation">
+            </div>
+            <div class="input-group">
+                <label>業務</label>
+                <input type="text" id="sales">
+            </div>
+            <div class="input-group">
+                <label>注意事項</label>
+                <input type="text" id="notes">
+            </div>
+            <div class="input-group">
+                <label>電話</label>
+                <input type="text" id="phone">
+            </div>
+        </div>
+        <button onclick="generateImage()">生成圖檔</button>
+        <div class="canvas-container">
+            <canvas id="canvas" width="3508" height="2480" style="border:1px solid black;"></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
